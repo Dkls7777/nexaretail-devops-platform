@@ -16,16 +16,10 @@
 
 ---
 
-## 🎯 Objectif de la Phase 1
+##  Objectif de la Phase 1
 
-NexaRetail SAS subissait des incidents liés à des déploiements manuels sur OVH.
-En janvier 2026, une mise en production a mis le site hors ligne pendant **3h47**.
-
-**Solution :** Mettre en place une Infrastructure as Code (IaC) complète avec Terraform
-pour provisionner un cluster Azure AKS reproductible en une seule commande.
-
-> *"Avant : on cliquait dans l'interface OVH en improvisant. Maintenant : une commande
-> `terraform apply` recrée toute l'infrastructure en 8 minutes, identique à chaque fois."*
+L'objectif de la Phase 1 est de poser les fondations de l'infrastructure cloud-native de NexaRetail en écrivant le code Terraform qui permet de créer automatiquement sur Azure tous les serveurs, réseaux et services nécessaires au projet.
+Avant cette phase, l'infrastructure n'existait que dans des clics manuels impossibles à reproduire. Après cette phase, une seule commande terraform apply suffit pour recréer toute l'infrastructure en 8 minutes, identique à chaque fois.
 
 ---
 
