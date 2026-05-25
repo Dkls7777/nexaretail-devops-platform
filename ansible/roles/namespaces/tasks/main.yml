@@ -1,0 +1,26 @@
+---
+- name: Créer les namespaces NexaRetail
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig }}"
+    context: "{{ kube_context }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "{{ item.name }}"
+        labels: "{{ item.labels }}"
+  loop: "{{ namespaces }}"
+
+- name: Vérifier les namespaces créés
+  kubernetes.core.k8s_info:
+    kubeconfig: "{{ kubeconfig }}"
+    context: "{{ kube_context }}"
+    kind: Namespace
+  register: ns_list
+
+- name: Afficher les namespaces
+  debug:
+    msg: "Namespace {{ item.metadata.name }} — {{ item.status.phase }}"
+  loop: "{{ ns_list.resources }}"
+  when: item.metadata.name in namespaces | map(attribute='name') | list

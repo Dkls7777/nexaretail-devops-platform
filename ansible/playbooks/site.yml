@@ -1,0 +1,33 @@
+---
+- name: NexaRetail — Configuration du cluster Kubernetes
+  hosts: nexaretail-cluster
+  gather_facts: false
+
+  pre_tasks:
+    - name: Vérifier la connexion au cluster
+      command: kubectl cluster-info --context kind-nexaretail-aks
+      changed_when: false
+
+    - name: Afficher le contexte actif
+      command: kubectl config current-context
+      register: current_context
+      changed_when: false
+
+    - name: Confirmer le cluster cible
+      debug:
+        msg: "🚀 Configuration du cluster : {{ current_context.stdout }}"
+
+  roles:
+    - namespaces
+    - rbac
+    - helm-repos
+
+  post_tasks:
+    - name: Résumé — Namespaces créés
+      command: kubectl get namespaces --context kind-nexaretail-aks
+      register: ns_summary
+      changed_when: false
+
+    - name: Afficher le résumé
+      debug:
+        msg: "{{ ns_summary.stdout_lines }}"

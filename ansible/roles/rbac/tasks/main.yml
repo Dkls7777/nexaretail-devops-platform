@@ -1,0 +1,45 @@
+---
+- name: Créer le ClusterRole DevOps NexaRetail
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig }}"
+    context: "{{ kube_context }}"
+    state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: nexaretail-devops
+      rules:
+        - apiGroups: ["", "apps", "batch"]
+          resources: ["pods", "deployments", "services", "configmaps", "jobs"]
+          verbs: ["get", "list", "watch", "create", "update", "patch"]
+        - apiGroups: ["monitoring.coreos.com"]
+          resources: ["prometheusrules", "servicemonitors"]
+          verbs: ["get", "list", "watch", "create", "update", "patch"]
+
+- name: Créer le ClusterRole lecture seule
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig }}"
+    context: "{{ kube_context }}"
+    state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: nexaretail-readonly
+      rules:
+        - apiGroups: ["", "apps"]
+          resources: ["pods", "deployments", "services", "configmaps"]
+          verbs: ["get", "list", "watch"]
+
+- name: Créer le ServiceAccount ArgoCD
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig }}"
+    context: "{{ kube_context }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: argocd-deployer
+        namespace: nexaretail-prod

@@ -1,0 +1,42 @@
+---
+# Cluster
+kube_context: "kind-nexaretail-aks"
+kubeconfig: "{{ lookup('env', 'HOME') }}/.kube/config"
+
+# Namespaces NexaRetail
+namespaces:
+  - name: nexaretail-prod
+    labels:
+      env: production
+      team: backend
+  - name: nexaretail-staging
+    labels:
+      env: staging
+      team: backend
+  - name: monitoring
+    labels:
+      env: production
+      team: ops
+  - name: argocd
+    labels:
+      env: production
+      team: platform
+  - name: vault
+    labels:
+      env: production
+      team: security
+  - name: security
+    labels:
+      env: production
+      team: security
+
+# Helm repositories
+helm_repos:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+  - name: hashicorp
+    url: https://helm.releases.hashicorp.com
+  - name: falcosecurity
+    url: https://falcosecurity.github.io/charts

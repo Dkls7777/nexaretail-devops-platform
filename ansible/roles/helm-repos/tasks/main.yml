@@ -1,0 +1,26 @@
+---
+- name: Installer Helm si absent
+  shell: |
+    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  args:
+    creates: /usr/local/bin/helm
+
+- name: Ajouter les repositories Helm NexaRetail
+  kubernetes.core.helm_repository:
+    name: "{{ item.name }}"
+    repo_url: "{{ item.url }}"
+    state: present
+  loop: "{{ helm_repos }}"
+
+- name: Mettre à jour les repositories Helm
+  command: helm repo update
+  changed_when: true
+
+- name: Lister les repositories Helm
+  command: helm repo list
+  register: helm_repo_list
+  changed_when: false
+
+- name: Afficher les repositories
+  debug:
+    msg: "{{ helm_repo_list.stdout_lines }}"
