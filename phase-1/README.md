@@ -3,7 +3,7 @@
 > **Projet :** NexaRetail DevOps Platform  
 > **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris  
 > **Date :** 25 mai 2026  
-> **Statut :** ✅ Terminé  
+> **Statut :**  Terminé  
 
 ---
 
@@ -23,12 +23,12 @@ Avant cette phase, l'infrastructure n'existait que dans des clics manuels imposs
 
 ---
 
-## 📦 Ce qui a été réalisé
+##  Ce qui a été réalisé
 
 ### Module 0 — Structure du repo GitHub
 - Création de 11 dossiers organisant tout le projet DevSecOps
 - Commit conventionnel `feat(structure): M0`
-- Ticket Jira SCRUM-5 → Terminé ✅
+- Ticket Jira SCRUM-5 → Terminé 
 
 ### Module 1 — Terraform / Azure AKS
 - Installation de Terraform v1.15.4 et Azure CLI v2.86.0
@@ -36,11 +36,11 @@ Avant cette phase, l'infrastructure n'existait que dans des clics manuels imposs
 - Configuration du backend Terraform sur Azure Blob Storage
 - Écriture de 8 fichiers Terraform (353 lignes de code IaC)
 - Déploiement de 5 ressources Azure réelles
-- Ticket Jira SCRUM-6 → Terminé ✅
+- Ticket Jira SCRUM-6 → Terminé 
 
 ---
 
-## 🏗️ Architecture déployée sur Azure
+##  Architecture déployée sur Azure
 
 ```
 Azure Cloud (France Central)
@@ -63,7 +63,7 @@ Azure Cloud (France Central)
 
 ---
 
-## 📁 Structure des fichiers Terraform créés
+##  Structure des fichiers Terraform créés
 
 ```
 infrastructure/terraform/
@@ -83,17 +83,17 @@ infrastructure/terraform/
 
 ---
 
-## ✅ Validation Terraform
+##  Validation Terraform
 
 ```
-terraform init   → Providers installés, backend Azure configuré    ✅
-terraform plan   → Plan: 7 to add, 0 to change, 0 to destroy       ✅
-terraform apply  → 5/7 ressources créées sur Azure                  ✅
+terraform init   → Providers installés, backend Azure configuré    
+terraform plan   → Plan: 7 to add, 0 to change, 0 to destroy       
+terraform apply  → 5/7 ressources créées sur Azure                  
 ```
 
 ---
 
-## 🐛 Problèmes rencontrés et solutions
+##  Problèmes rencontrés et solutions
 
 | Problème | Solution |
 |----------|----------|
@@ -106,7 +106,7 @@ terraform apply  → 5/7 ressources créées sur Azure                  ✅
 
 ---
 
-## 📊 Chiffres clés
+##  Chiffres clés
 
 | Indicateur | Valeur |
 |------------|--------|
