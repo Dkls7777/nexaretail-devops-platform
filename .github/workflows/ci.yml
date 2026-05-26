@@ -71,7 +71,6 @@ jobs:
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
           ignore-unfixed: true
-          trivyignores: .trivyignore
           skip-dirs: '/usr/local/lib/node_modules/npm,/usr/local/lib/node_modules/corepack,/opt/yarn-v1.22.22'
 
       - name: Rapport Trivy complet (informatif)
