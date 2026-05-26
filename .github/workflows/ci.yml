@@ -1,0 +1,102 @@
+name: CI — Build, Scan & Push
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'helm/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main]
+
+env:
+  IMAGE_NAME: nexaretail-api
+  ACR_LOGIN_SERVER: ${{ secrets.ACR_LOGIN_SERVER }}
+
+jobs:
+  # ─────────────────────────────────────────────
+  # JOB 1 : Qualité & sécurité du code
+  # ─────────────────────────────────────────────
+  code-quality:
+    name: 🔍 Code Quality & npm Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: app/package.json
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install
+
+      - name: npm audit (sécurité dépendances)
+        working-directory: app
+        run: npm audit --audit-level=high
+
+  # ─────────────────────────────────────────────
+  # JOB 2 : Build + Scan Trivy + Push ACR
+  # ─────────────────────────────────────────────
+  build-scan-push:
+    name: 🐳 Build → Trivy Scan → Push ACR
+    runs-on: ubuntu-latest
+    needs: code-quality
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login ACR Azure
+        run: az acr login --name nexaretailprodacr
+
+      - name: Build image Docker
+        run: |
+          docker build \
+            --build-arg BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+            --build-arg APP_VERSION=1.0.${{ github.run_number }} \
+            -t $ACR_LOGIN_SERVER/$IMAGE_NAME:1.0.${{ github.run_number }} \
+            -t $ACR_LOGIN_SERVER/$IMAGE_NAME:latest \
+            app/
+
+      - name: Scan Trivy — CRITICAL et HIGH bloquants
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+          format: table
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+          ignore-unfixed: true
+
+      - name: Rapport Trivy complet (informatif)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+          format: sarif
+          output: trivy-results.sarif
+          severity: 'MEDIUM,LOW'
+        continue-on-error: true
+
+      - name: Upload rapport Trivy
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-security-report
+          path: trivy-results.sarif
+
+      - name: Push vers ACR Azure
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:1.0.${{ github.run_number }}
+          docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:latest
+          echo "✅ Image pushée : $ACR_LOGIN_SERVER/$IMAGE_NAME:1.0.${{ github.run_number }}"
