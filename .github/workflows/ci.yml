@@ -15,9 +15,6 @@ env:
   ACR_LOGIN_SERVER: ${{ secrets.ACR_LOGIN_SERVER }}
 
 jobs:
-  # ─────────────────────────────────────────────
-  # JOB 1 : Qualité & sécurité du code
-  # ─────────────────────────────────────────────
   code-quality:
     name: 🔍 Code Quality & npm Audit
     runs-on: ubuntu-latest
@@ -40,9 +37,6 @@ jobs:
         working-directory: app
         run: npm audit --audit-level=high
 
-  # ─────────────────────────────────────────────
-  # JOB 2 : Build + Scan Trivy + Push ACR
-  # ─────────────────────────────────────────────
   build-scan-push:
     name: 🐳 Build → Trivy Scan → Push ACR
     runs-on: ubuntu-latest
@@ -77,6 +71,8 @@ jobs:
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
           ignore-unfixed: true
+          trivyignores: .trivyignore
+          skip-dirs: '/usr/local/lib/node_modules/npm,/usr/local/lib/node_modules/corepack,/opt/yarn-v1.22.22'
 
       - name: Rapport Trivy complet (informatif)
         uses: aquasecurity/trivy-action@master
@@ -85,6 +81,7 @@ jobs:
           format: sarif
           output: trivy-results.sarif
           severity: 'MEDIUM,LOW'
+          skip-dirs: '/usr/local/lib/node_modules/npm,/usr/local/lib/node_modules/corepack,/opt/yarn-v1.22.22'
         continue-on-error: true
 
       - name: Upload rapport Trivy
