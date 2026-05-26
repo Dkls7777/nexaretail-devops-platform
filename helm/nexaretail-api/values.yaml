@@ -1,9 +1,9 @@
 replicaCount: 2
 
 image:
-  repository: nexaretailprodacr.azurecr.io/nexaretail-api
+  repository: nexaretail-api
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "1.0.0"
 
 service:
   type: ClusterIP
