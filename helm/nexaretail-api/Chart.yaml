@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nexaretail-api
+description: API NexaRetail - Gestion des commandes B2B
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

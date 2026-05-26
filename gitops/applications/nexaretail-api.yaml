@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nexaretail-api
+  namespace: argocd
+  labels:
+    project: nexaretail
+    team: backend
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Dkls7777/nexaretail-devops-platform
+    targetRevision: main
+    path: helm/nexaretail-api
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nexaretail-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
