@@ -1,0 +1,22 @@
+# Configuration de l'authentification Kubernetes pour Vault
+# Ce fichier documente la configuration appliquée via CLI
+# Commandes équivalentes :
+#   vault auth enable kubernetes
+#   vault write auth/kubernetes/config kubernetes_host="https://kubernetes.default.svc.cluster.local:443"
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-config-doc
+  namespace: vault
+  labels:
+    project: nexaretail
+    component: vault
+data:
+  kubernetes_host: "https://kubernetes.default.svc.cluster.local:443"
+  kv_path: "nexaretail/"
+  kv_version: "v2"
+  role: "nexaretail-api"
+  bound_service_account: "argocd-deployer"
+  bound_namespace: "nexaretail-prod"
+  token_ttl: "1h"
