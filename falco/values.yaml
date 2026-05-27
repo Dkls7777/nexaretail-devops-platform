@@ -1,0 +1,48 @@
+# Configuration Falco - NexaRetail DevOps Platform
+# Deploiement via Helm chart falcosecurity/falco
+
+driver:
+  kind: modern_ebpf
+
+tty: true
+
+customRules:
+  nexaretail_rules.yaml: |-
+    - rule: NexaRetail Shell in Production Container
+      desc: Detection d'un shell interactif ouvert dans un pod de production NexaRetail
+      condition: >
+        spawned_process and
+        container and
+        k8s.ns.name = "nexaretail-prod" and
+        proc.name in (bash, sh, zsh, ash, dash)
+      output: >
+        CRITICAL - Shell ouvert dans pod production NexaRetail
+        (pod=%k8s.pod.name ns=%k8s.ns.name user=%user.name cmd=%proc.cmdline image=%container.image.repository)
+      priority: CRITICAL
+      tags: [nexaretail, production, shell, mitre_execution]
+
+    - rule: NexaRetail Sensitive File Access
+      desc: Detection d'un acces aux fichiers sensibles dans les conteneurs NexaRetail
+      condition: >
+        open_read and
+        container and
+        k8s.ns.name startswith "nexaretail" and
+        fd.name in (/etc/passwd, /etc/shadow, /etc/sudoers, /root/.ssh/id_rsa)
+      output: >
+        ERROR - Acces fichier sensible dans NexaRetail
+        (pod=%k8s.pod.name ns=%k8s.ns.name file=%fd.name user=%user.name image=%container.image.repository)
+      priority: ERROR
+      tags: [nexaretail, sensitive-file, mitre_credential_access]
+
+    - rule: NexaRetail Unexpected Outbound Connection
+      desc: Detection d'une connexion reseau sortante inattendue depuis un pod NexaRetail
+      condition: >
+        outbound and
+        container and
+        k8s.ns.name = "nexaretail-prod" and
+        not fd.sport in (3000, 443, 80, 5432)
+      output: >
+        WARNING - Connexion sortante inattendue depuis NexaRetail prod
+        (pod=%k8s.pod.name ns=%k8s.ns.name dest=%fd.rip:%fd.rport proto=%fd.l4proto)
+      priority: WARNING
+      tags: [nexaretail, network, mitre_exfiltration]
