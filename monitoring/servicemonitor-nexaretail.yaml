@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nexaretail-api
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - nexaretail-prod
+  selector:
+    matchLabels:
+      app: nexaretail-api
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

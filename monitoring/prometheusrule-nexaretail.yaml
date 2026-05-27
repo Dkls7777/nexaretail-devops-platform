@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: nexaretail-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: nexaretail.slo
+      interval: 30s
+      rules:
+        - alert: NexaRetailAPIHighLatency
+          expr: |
+            histogram_quantile(0.95,
+              sum(rate(http_request_duration_seconds_bucket{job="nexaretail-api"}[5m]))
+              by (le, route)
+            ) > 0.5
+          for: 2m
+          labels:
+            severity: warning
+            team: backend
+          annotations:
+            summary: "API NexaRetail latence elevee"
+            description: "Le P95 de latence depasse 500ms depuis 2 minutes sur la route {{ $labels.route }}"
+
+        - alert: NexaRetailAPIDown
+          expr: |
+            absent(http_request_duration_seconds_count{job="nexaretail-api"})
+          for: 1m
+          labels:
+            severity: critical
+            team: backend
+          annotations:
+            summary: "API NexaRetail inaccessible"
+            description: "Aucune metrique recue depuis l'API NexaRetail depuis 1 minute"
