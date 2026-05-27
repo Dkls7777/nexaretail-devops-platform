@@ -1,7 +1,7 @@
 # Phase 6 — CD Automation GitOps
 
 > **Projet :** NexaRetail DevOps Platform
-> **Auteur :** Sam DOSSOU — Etudiant L3 Cybersecurite EFREI Paris
+> **Auteur :** Sam DOSSOU -Etudiant L3 Cybersecurite EFREI Paris
 > **Date :** 27 mai 2026
 > **Statut :** Termine
 
@@ -27,7 +27,7 @@ automatiquement le tag de l'image dans le Helm chart apres chaque build reussi.
 
 > "Avant : apres le build, il fallait modifier values.yaml a la main et pusher
 > pour que ArgoCD detecte le changement. Maintenant : le pipeline fait tout
-> automatiquement — build, scan, push ACR, mise a jour du chart, redeploiement
+> automatiquement - build, scan, push ACR, mise a jour du chart, redeploiement
 > en moins de 2 minutes."
 
 ---
@@ -66,9 +66,9 @@ Ce job realise 4 operations :
 Le run #5 a valide la chaine complete en 1m 23s :
 
 ```
-Job 1 - Code Quality & npm Audit     : 10s  — 0 vulnerabilite
-Job 2 - Build - Trivy Scan - Push    : 56s  — image 1.0.5 pushee sur ACR
-Job 3 - Update Helm values - GitOps  : 6s   — values.yaml mis a jour, commit pousse
+Job 1 - Code Quality & npm Audit     : 10s  - 0 vulnerabilite
+Job 2 - Build - Trivy Scan - Push    : 56s  - image 1.0.5 pushee sur ACR
+Job 3 - Update Helm values - GitOps  : 6s   - values.yaml mis a jour, commit pousse
 ```
 
 Verification dans `helm/nexaretail-api/values.yaml` apres le run :
