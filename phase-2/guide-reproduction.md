@@ -5,7 +5,7 @@
 
 ---
 
-## ⚙️ Prérequis
+##  Prérequis
 
 - Windows 10/11 avec droits administrateur
 - Git installé
@@ -14,7 +14,7 @@
 
 ---
 
-## 📥 Étape 1 — Installer WSL (Windows Subsystem for Linux)
+##  Étape 1 — Installer WSL (Windows Subsystem for Linux)
 
 Dans PowerShell :
 
@@ -36,7 +36,7 @@ wsl --version
 
 ---
 
-## 📥 Étape 2 — Installer Ansible dans WSL
+##  Étape 2 — Installer Ansible dans WSL
 
 Ouvrir le terminal WSL (taper `wsl` dans PowerShell ou chercher "Ubuntu" dans le menu démarrer) :
 
@@ -58,7 +58,7 @@ ansible --version
 
 ---
 
-## 📥 Étape 3 — Installer kubectl + Azure CLI
+##  Étape 3 — Installer kubectl + Azure CLI
 
 ```bash
 # kubectl
@@ -79,7 +79,7 @@ kubectl version --client && az --version | head -3
 
 ---
 
-## 📥 Étape 4 — Installer Docker + kind
+##  Étape 4 — Installer Docker + kind
 
 > **Pourquoi kind et pas AKS ?**
 > La subscription Azure gratuite bloque les VMs standard nécessaires à AKS.
@@ -109,7 +109,7 @@ kind --version     # kind version 0.27.0
 
 ---
 
-## ☸️ Étape 5 — Créer le cluster Kubernetes
+##  Étape 5 — Créer le cluster Kubernetes
 
 ```bash
 sudo service docker start
@@ -129,7 +129,7 @@ kubectl get nodes
 
 ---
 
-## 📥 Étape 6 — Installer Helm
+##  Étape 6 — Installer Helm
 
 > Important : installer Helm depuis le home Linux (`~/`) et non depuis /mnt/c.
 > Le système de fichiers Windows (NTFS) ne supporte pas les permissions Linux (chmod).
@@ -150,7 +150,7 @@ helm version
 
 ---
 
-## 📁 Étape 7 — Créer la structure Ansible
+##  Étape 7 — Créer la structure Ansible
 
 Se placer dans le repo :
 ```bash
@@ -164,7 +164,7 @@ mkdir -p ansible/{inventory,group_vars,roles/{namespaces,rbac,helm-repos}/tasks,
 
 ---
 
-## 📝 Étape 8 — Créer les fichiers Ansible
+##  Étape 8 — Créer les fichiers Ansible
 
 ### 8.1 — Configuration (`ansible/ansible.cfg`)
 
@@ -379,7 +379,7 @@ cat > ansible/playbooks/site.yml << 'EOF'
 
     - name: Confirmer le cluster cible
       debug:
-        msg: "🚀 Configuration du cluster : {{ current_context.stdout }}"
+        msg: " Configuration du cluster : {{ current_context.stdout }}"
 
   roles:
     - namespaces
@@ -413,7 +413,7 @@ EOF
 
 ---
 
-## 🚀 Étape 9 — Installer les dépendances et lancer le playbook
+##  Étape 9 — Installer les dépendances et lancer le playbook
 
 ```bash
 # Librairie Python pour Kubernetes
@@ -439,7 +439,7 @@ ansible-playbook playbooks/site.yml \
 
 ---
 
-## ✅ Résultat attendu
+##  Résultat attendu
 
 ```
 PLAY RECAP
@@ -467,7 +467,7 @@ helm repo list
 
 ---
 
-## 📤 Étape 10 — Commit et push sur GitHub
+##  Étape 10 — Commit et push sur GitHub
 
 ```bash
 cd /mnt/c/Users/<ton-user>/nexaretail-devops-platform
@@ -498,7 +498,7 @@ git push origin main
 
 ---
 
-## 🐛 Erreurs fréquentes
+##  Erreurs fréquentes
 
 ### `ansible` non reconnu
 **Cause :** Ansible non installé ou exécuté depuis PowerShell.
