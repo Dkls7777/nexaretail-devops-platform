@@ -33,7 +33,8 @@ app.get('/version', (req, res) => {
     name: 'nexaretail-api',
     version: process.env.APP_VERSION || '1.0.0',
     environment: process.env.NODE_ENV || 'development',
-    buildDate: process.env.BUILD_DATE || 'local'
+    buildDate: process.env.BUILD_DATE || 'local',
+    demo: 'M11 - Pipeline bout en bout - NexaRetail DevSecOps'
   });
 });
 app.use('/api/orders', ordersRouter);
