@@ -156,4 +156,4 @@ azure-admin-dkwave/
 
 **Sam DOSSOU** — En recherche d'alternance 
  [dossam2006@gmail.com]  
-🔗 [Votre LinkedIn]
+🔗 www.linkedin.com/in/sam-dossou
