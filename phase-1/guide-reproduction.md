@@ -5,7 +5,7 @@
 
 ---
 
-## ⚙️ Prérequis
+##  Prérequis
 
 - Windows 10/11 avec PowerShell
 - Git installé
@@ -14,7 +14,7 @@
 
 ---
 
-## 📥 Étape 1 — Installer Terraform
+##  Étape 1 — Installer Terraform
 
 **1.1 Télécharger Terraform**
 
@@ -43,7 +43,7 @@ terraform --version
 
 ---
 
-## 📥 Étape 2 — Installer Azure CLI
+##  Étape 2 — Installer Azure CLI
 
 **2.1 Télécharger l'installeur**
 
@@ -59,7 +59,7 @@ az --version
 
 ---
 
-## ☁️ Étape 3 — Configurer Azure
+##  Étape 3 — Configurer Azure
 
 **3.1 Se connecter à Azure**
 
@@ -115,7 +115,7 @@ az storage container create `
 
 ---
 
-## 📁 Étape 4 — Créer la structure des dossiers
+##  Étape 4 — Créer la structure des dossiers
 
 Naviguer dans le repo GitHub cloné localement :
 
@@ -129,9 +129,9 @@ New-Item -ItemType Directory -Force -Path "infrastructure\terraform\modules\aks"
 
 ---
 
-## 📝 Étape 5 — Créer les fichiers Terraform
+##  Étape 5 — Créer les fichiers Terraform
 
-> ⚠️ **Important :** Toujours utiliser `@'...'@` (guillemets simples)
+>  **Important :** Toujours utiliser `@'...'@` (guillemets simples)
 > et non `@"..."@` pour éviter que PowerShell interprète les variables `${var.x}`.
 
 **5.1 providers.tf**
@@ -494,7 +494,7 @@ output "kubelet_identity" {
 
 ---
 
-## 🚀 Étape 6 — Lancer Terraform
+##  Étape 6 — Lancer Terraform
 
 ```powershell
 cd infrastructure\terraform\environments\prod
@@ -512,13 +512,13 @@ terraform plan
 terraform apply
 ```
 
-> ⚠️ **Note version Kubernetes :** Utiliser `az aks get-versions` pour choisir
+>  **Note version Kubernetes :** Utiliser `az aks get-versions` pour choisir
 > une version non-LTS disponible dans votre région. Eviter 1.29, 1.30, 1.31
 > (LTS payant). Version 1.33 recommandée.
 
 ---
 
-## 🔒 Étape 7 — .gitignore (IMPORTANT)
+##  Étape 7 — .gitignore (IMPORTANT)
 
 Ne jamais committer le dossier `.terraform` (contient des binaires de 200MB+).
 Vérifier que le `.gitignore` contient bien ces lignes :
@@ -530,7 +530,7 @@ Vérifier que le `.gitignore` contient bien ces lignes :
 
 ---
 
-## 📤 Étape 8 — Commit et push sur GitHub
+##  Étape 8 — Commit et push sur GitHub
 
 ```bash
 git add infrastructure/terraform/
@@ -548,7 +548,7 @@ git push origin main
 
 ---
 
-## 🧹 Nettoyage (pour éviter les frais Azure)
+##  Nettoyage (pour éviter les frais Azure)
 
 Quand le projet est terminé ou en pause, supprimer les ressources :
 
@@ -563,28 +563,28 @@ terraform destroy
 
 ---
 
-## ✅ Résultat attendu
+##  Résultat attendu
 
 Après avoir suivi ce guide, vous devez avoir sur Azure :
 
 ```
 nexaretail-prod-rg
-├── nexaretail-prod-vnet    ✅ Réseau virtuel
-├── aks-subnet              ✅ Sous-réseau
-├── nexaretailprodacr       ✅ Container Registry
-├── nexaretail-prod-law     ✅ Log Analytics
-└── nexaretail-prod-aks     ✅ Cluster AKS (si quota VM disponible)
+├── nexaretail-prod-vnet     Réseau virtuel
+├── aks-subnet               Sous-réseau
+├── nexaretailprodacr        Container Registry
+├── nexaretail-prod-law      Log Analytics
+└── nexaretail-prod-aks      Cluster AKS (si quota VM disponible)
 ```
 
 Et sur GitHub :
 ```
-infrastructure/terraform/     ✅ 8 fichiers Terraform
-.gitignore                    ✅ .terraform/ exclu
+infrastructure/terraform/      8 fichiers Terraform
+.gitignore                     .terraform/ exclu
 ```
 
 ---
 
-## 🐛 Erreurs fréquentes
+##  Erreurs fréquentes
 
 ### Variables vides (`--rg`, `acr`)
 **Cause :** Utilisation de `@"..."@` au lieu de `@'...'@` dans PowerShell.  
