@@ -2,12 +2,11 @@
 
 > **Projet :** NexaRetail DevOps Platform
 > **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris
-> **Date :** 25 mai 2026
-> **Statut :** ✅ Terminé
+> **Statut :**  Terminé
 
 ---
 
-## 📋 Contenu de ce dossier
+##  Contenu de ce dossier
 
 | Fichier | Description |
 |---------|-------------|
@@ -16,7 +15,7 @@
 
 ---
 
-## 🎯 Objectif de la Phase 2
+##  Objectif de la Phase 2
 
 Après avoir provisionné l'infrastructure en Phase 1, il faut maintenant
 **configurer** le cluster Kubernetes pour accueillir les workloads NexaRetail.
@@ -32,9 +31,9 @@ les erreurs humaines qui causaient les incidents.
 
 ---
 
-## 📦 Ce qui a été réalisé
+##  Ce qui a été réalisé
 
-### 🐧 Installation de l'environnement Linux (WSL)
+###  Installation de l'environnement Linux (WSL)
 
 Ansible ne fonctionne pas nativement sur Windows comme control node.
 La solution standard en entreprise est d'utiliser WSL (Windows Subsystem
@@ -45,7 +44,7 @@ dual boot ni machine virtuelle séparée.
 - Ubuntu 24 (resolute) configuré avec compte utilisateur Linux
 - C'est la première fois que Sam dispose d'un vrai environnement Linux sur son PC
 
-### 🔧 Installation de la chaîne d'outils DevOps
+###  Installation de la chaîne d'outils DevOps
 
 Dans WSL, installation de tous les outils nécessaires au projet :
 
@@ -58,7 +57,7 @@ Dans WSL, installation de tous les outils nécessaires au projet :
 | kind | 0.27.0 | Kubernetes local |
 | Helm | v3.21.0 | Gestionnaire de paquets Kubernetes |
 
-### ⚠️ Problème quota Azure — Changement de stratégie
+###  Problème quota Azure — Changement de stratégie
 
 On a tenté de créer un cluster AKS sur Azure, mais la subscription gratuite
 n'autorise que des VMs très premium (série M, NC, NV — à partir de 500€/mois).
@@ -69,12 +68,12 @@ kind crée un vrai cluster Kubernetes local dans Docker. Comportement identique
 à AKS pour tous nos besoins DevSecOps. C'est d'ailleurs ce que font la plupart
 des équipes DevOps pour les environnements de développement.
 
-### ☸️ Cluster Kubernetes local
+###  Cluster Kubernetes local
 
 Le cluster `nexaretail-aks` a été créé avec kind en **13 secondes**.
 1 node control-plane en Kubernetes v1.32.2, prêt à recevoir nos workloads.
 
-### 📝 Configuration Ansible du cluster
+###  Configuration Ansible du cluster
 
 Création de 8 fichiers Ansible organisés en 3 rôles :
 
@@ -87,7 +86,7 @@ et des post_tasks de résumé.
 
 ---
 
-## 🏗️ Architecture configurée
+##  Architecture configurée
 
 ```
 Cluster Kubernetes (kind-nexaretail-aks)
@@ -113,7 +112,7 @@ Helm Repositories
 
 ---
 
-## 📁 Structure des fichiers Ansible créés
+##  Structure des fichiers Ansible créés
 
 ```
 ansible/
@@ -133,11 +132,11 @@ ansible/
 
 ---
 
-## ✅ Validation Ansible
+##  Validation Ansible
 
 ```
 PLAY RECAP
-nexaretail-cluster : ok=16  changed=2  unreachable=0  failed=0  ✅
+nexaretail-cluster : ok=16  changed=2  unreachable=0  failed=0  
 
 kubectl get namespaces
 NAME                 STATUS   AGE
@@ -157,7 +156,7 @@ falcosecurity         https://falcosecurity.github.io/charts              ✅
 
 ---
 
-## 🐛 Problèmes rencontrés et solutions
+##  Problèmes rencontrés et solutions
 
 | Problème | Cause | Solution |
 |----------|-------|----------|
@@ -171,7 +170,7 @@ falcosecurity         https://falcosecurity.github.io/charts              ✅
 
 ---
 
-## 📊 Chiffres clés
+##  Chiffres clés
 
 | Indicateur | Valeur |
 |------------|--------|
@@ -185,7 +184,7 @@ falcosecurity         https://falcosecurity.github.io/charts              ✅
 
 ---
 
-## 🔗 Liens utiles
+##  Liens utiles
 
 - **GitHub :** github.com/Dkls7777/nexaretail-devops-platform
 - **Jira :** samdossou26.atlassian.net (SCRUM-7)
