@@ -1,121 +1,159 @@
-#  NexaRetail DevOps Platform
+#  Azure Administrator Hands-On Lab — DK WAVE TECHNOLOGY
 
-![CI](https://github.com/Dkls7777/nexaretail-devops-platform/actions/workflows/ci.yml/badge.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Azure](https://img.shields.io/badge/Cloud-Azure%20AKS-0078D4?logo=microsoft-azure)
-![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC?logo=terraform)
-![ArgoCD](https://img.shields.io/badge/GitOps-ArgoCD-EF7B4D?logo=argo)
-![Kubernetes](https://img.shields.io/badge/Orchestration-Kubernetes-326CE5?logo=kubernetes)
-
-> Plateforme DevSecOps cloud-native complète simulant la migration d'infrastructure de NexaRetail SAS vers Azure AKS. Zéro downtime, déploiements quotidiens, -18% de coûts infra.
-
-
-##  Contexte & Problème résolu
- 
-*L'entreprise :* NexaRetail SAS — scale-up française e-commerce B2B, 180 collaborateurs, 
-4 millions de commandes/mois pour 2 300 marchands clients.
-
-**Le problème :** Infrastructure sur serveurs dédiés OVH, déploiements 100% manuels 
-chaque jeudi soir via des shell scripts dans des cron jobs. Le serveur de secours 
-n'avait pas été testé depuis 14 mois.
-
-**L'incident déclencheur :** En janvier, une mise en production a mis le site hors ligne 
-pendant **3h47** — le CTO a reçu un appel de son plus gros client à 23h. 
-MTTR (temps de restauration) : 3h47. Détection de l'incident : quand le client appelle.
-
-**Ma mission :** Migrer vers une infrastructure cloud-native Azure en 8 semaines.
-Concevoir et déployer de A à Z une plateforme DevSecOps complète incluant :
-- Provisionnement IaC avec Terraform (AKS, ACR, Key Vault)
-- Pipeline CI/CD avec GitHub Actions et quality gate Trivy
-- GitOps avec ArgoCD — chaque push sur main déclenche un déploiement automatique
-- Monitoring avec SLO Prometheus (99,5% des requêtes < 500ms)
-- Gestion des secrets avec HashiCorp Vault (conformité SOC 2)
-- Sécurité runtime avec Falco et audit Kubescape (score NSA/CISA > 70%)
-
-##  Objectifs
-
-| Objectif | Mesure | Statut |
-|---|---|---|
-| Zéro downtime | Rolling updates Kubernetes | 🔄 En cours |
-| Déploiements quotidiens | Plusieurs fois/jour via GitOps | 🔄 En cours |
-| Réduction coûts infra | -18% coût mensuel | 🔄 En cours |
-| Détection incident | < 2 minutes via alertes Prometheus | 🔄 En cours |
-| MTTR | < 15 minutes | 🔄 En cours |
-| Conformité SOC 2 | Score Kubescape NSA/CISA > 70% | 🔄 En cours |
-
-
-##  Architecture
-GitHub → GitHub Actions (CI) → Azure Container Registry
-↓
-ArgoCD (GitOps) → AKS Cluster
-↓
-Prometheus + Grafana | Vault | Falco | Kubescape
-
-
-##  Stack technique
-
-| Catégorie | Technologie |
-|---|---|
-| Cloud | Microsoft Azure (AKS, ACR, Key Vault) |
-| IaC | Terraform |
-| Configuration | Ansible |
-| GitOps | ArgoCD + Helm |
-| CI/CD | GitHub Actions |
-| Monitoring | Prometheus + Grafana |
-| Secrets | HashiCorp Vault |
-| Sécurité runtime | Falco |
-| Conformité | Kubescape (NSA/CISA, MITRE) |
-| Container Scanning | Trivy |
-
-
-## 📁 Structure du repo
-nexaretail-devops-platform/
-├── app/
-│   ├── src/index.js
-│   ├── tests/
-│   └── Dockerfile
-├── infrastructure/
-│   └── terraform/
-├── platform/
-│   ├── argocd/
-│   ├── helm/nexaretail-api/
-│   ├── monitoring/
-│   └── security/
-├── .github/workflows/
-│   ├── ci.yml
-│   └── cd.yml
-└── docs/
-
-
-##  Résultats Avant / Après
-
-| Indicateur | Avant (OVH) | Après (Cloud Native) |
-|---|---|---|
-| Fréquence de déploiement | 1x/semaine | Plusieurs fois/jour |
-| Durée de déploiement | 35-50 min | 4-6 min |
-| MTTR | 3h47 | < 15 minutes |
-| Détection d'incident | Quand le client appelle | < 2 minutes |
-| Coût mensuel infra | Base 100 | Base 82 (-18%) |
-
-
-##  Modules
-
-- **Module 0** — Structure du repository
-- **Module 1** — Infrastructure as Code avec Terraform
-- **Module 2** — Configuration cluster avec Ansible
-- **Module 3** — GitOps avec ArgoCD
-- **Module 4** — Application conteneurisée Node.js
-- **Module 5** — CI avec GitHub Actions + Trivy
-- **Module 6** — CD + Automation GitOps
-- **Module 7** — Monitoring Prometheus & Grafana
-- **Module 8** — Secrets avec HashiCorp Vault
-- **Module 9** — Sécurité runtime avec Falco
-- **Module 10** — Conformité avec Kubescape
+> **Projet complet d'administration Azure** réalisé dans le cadre d'une formation pratique d'Administrateur Systèmes & Réseaux Cloud.  
+> Déployé entièrement via Azure CLI, Cloud Shell et API REST Azure.
 
 ---
 
-##  Auteur
+##  À propos
 
-**Sam DOSSOU** — Ingénieur Cybersécurité & Cloud | DevSecOps | EFREI Paris
-[![GitHub](https://img.shields.io/badge/GitHub-Dkls7777-181717?logo=github)](https://github.com/Dkls7777)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-sam--dossou-0A66C2?logo=linkedin)](https://linkedin.com/in/sam-dossou)
+**Sam DOSSOU** — Étudiant en premiere année de cycle ingénieur/ Alternance recherchée  
+Environnement : Microsoft Azure (West Europe) | Subscription : Pay-As-You-Go  
+Période de réalisation : Avril 2026
+
+---
+
+##  Contexte du projet
+
+**DK WAVE TECHNOLOGY** est une entreprise fictive éditrice de logiciels SaaS en pleine croissance.  
+- 20 collaborateurs en télétravail  
+- Application web exposée aux clients  
+- Infrastructure 100 % cloud — aucun datacenter on-premise  
+- Un seul administrateur IT (rôle joué dans ce lab)
+
+L'objectif était de construire, de zéro, une infrastructure Azure **complète, sécurisée, supervisée et résiliente**, en suivant les bonnes pratiques enterprise : Zero Trust, moindre privilège, Infrastructure as Code, monitoring proactif et Disaster Recovery.
+
+---
+
+##  Architecture globale
+
+```
+                        ┌─────────────────────────────────────┐
+                        │         Azure Subscription           │
+                        │                                       │
+                        │  ┌────────────────────────────────┐  │
+                        │  │      rg-dkwave-shared           │  │
+                        │  │  VNet · NSG · Bastion · Firewall│  │
+                        │  │  Log Analytics · RSV · Policy   │  │
+                        │  └────────────────────────────────┘  │
+                        │                                       │
+                        │  ┌────────────────────────────────┐  │
+                        │  │       rg-dkwave-prod            │  │
+                        │  │  vm-app01 (Ubuntu 22.04)        │  │
+                        │  │  vm-web02 (Windows Server 2022) │  │
+                        │  │  Key Vault · Load Balancer      │  │
+                        │  └────────────────────────────────┘  │
+                        │                                       │
+                        │  ┌────────────────────────────────┐  │
+                        │  │      rg-dkwave-nonprod          │  │
+                        │  │  Environnements Dev / Test      │  │
+                        │  └────────────────────────────────┘  │
+                        └─────────────────────────────────────┘
+```
+
+**Réseau VNet (10.0.0.0/16) — 6 sous-réseaux :**
+
+| Sous-réseau | Plage IP | Rôle |
+|---|---|---|
+| AzureFirewallSubnet | 10.0.0.0/24 | Azure Firewall |
+| GatewaySubnet | 10.0.1.0/24 | VPN Gateway |
+| subnet-web | 10.0.10.0/24 | Couche Web / Load Balancer |
+| subnet-app | 10.0.20.0/24 | Couche Application |
+| subnet-db | 10.0.30.0/24 | Base de données (usage futur) |
+| AzureBastionSubnet | 10.0.40.0/26 | Accès admin sécurisé |
+
+---
+
+##  Phases du projet
+
+| Phase | Titre | Statut |
+|---|---|---|
+| [Phase 1](./phases/phase1/README.md) |  Mise en place des fondations | Complétée |
+| [Phase 2](./phases/phase2/README.md) |  Infrastructure Cœur |  Complétée |
+| [Phase 3](./phases/phase3/README.md) |  Sécurité & Gouvernance |  Complétée |
+| [Phase 4](./phases/phase4/README.md) |  Monitoring & Opérations |  Complétée |
+| [Phase 5](./phases/phase5/README.md) |  Automatisation & Optimisation |  Complétée |
+| [Phase 6](./phases/phase6/README.md) |  Résilience & Disaster Recovery |  Complétée |
+| [Phase 7](./phases/phase7/README.md) |  Daily Administration & Operations |  Complétée |
+
+---
+
+##  Compétences démontrées
+
+### Cloud & Azure
+- Gestion d'identités avec **Entra ID** (RBAC, groupes, MFA, accès conditionnel)
+- Conception et déploiement de **réseaux virtuels** segmentés (VNet, NSG, subnets)
+- Sécurisation avec **Azure Firewall**, **Key Vault**, **Microsoft Defender for Cloud**, **WAF**
+- Monitoring avec **Log Analytics**, **Azure Monitor**, **Data Collection Rules**, alertes CPU
+- **Infrastructure as Code** avec Azure Bicep (templates paramétrés multi-environnements)
+- **Backup et Disaster Recovery** avec Recovery Services Vault et Azure Site Recovery
+- Administration quotidienne : cycle de vie utilisateurs, gestion d'incidents, change management
+
+### Outils & Méthodes
+- **Azure CLI** — commandes avancées et scripting
+- **API REST Azure** (`az rest`) — contournement des limitations CLI
+- **KQL** (Kusto Query Language) — requêtes Log Analytics
+- **Azure Bicep** — Infrastructure as Code
+- **Cloud Shell** — environnement de travail standardisé
+
+### Soft Skills démontrés
+- Résolution de problèmes en conditions réelles (quotas, policies bloquantes, erreurs CLI)
+- Adaptation méthodologique face aux contraintes techniques imprévues
+- Documentation professionnelle de chaque phase
+
+---
+
+##  Contrainte transversale majeure
+
+Tout au long du projet, une **Azure Policy** enforçant 4 tags obligatoires (`Environment`, `Owner`, `Company`, `CostCenter`) bloquait automatiquement toutes les créations de ressources via les commandes CLI standard.
+
+**Solution systématiquement appliquée :** utilisation de `az rest` avec des corps JSON complets incluant les tags requis, contournant les limitations des extensions CLI.
+
+```bash
+# Exemple de workaround az rest utilisé tout au long du projet
+az rest --method PUT \
+  --uri "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/{resource}?api-version=..." \
+  --body '{
+    "location": "westeurope",
+    "properties": { ... },
+    "tags": {
+      "Environment": "Production",
+      "Owner": "IT",
+      "Company": "DK-WAVE",
+      "CostCenter": "IT-OPS"
+    }
+  }'
+```
+
+---
+
+## Structure du dépôt
+
+```
+azure-admin-dkwave/
+├── README.md                    ← Vous êtes ici — vue d'ensemble du projet
+├── rapports/                    ← Rapports Word complets par phase
+│   ├── Rapport_Phase1.docx
+│   ├── Rapport_Phase2.docx
+│   ├── Rapport_Phase3.docx
+│   ├── Rapport_Phase4.docx
+│   ├── Rapport_Phase5.docx
+│   ├── Rapport_Phase6.docx
+│   └── Rapport_Phase7.docx
+└── phases/                      ← Détail technique de chaque phase
+    ├── phase1/README.md         ← Fondations : identités, RBAC, tags
+    ├── phase2/README.md         ← Réseau, VMs, Bastion, Load Balancer
+    ├── phase3/README.md         ← Sécurité : Firewall, Key Vault, Defender
+    ├── phase4/README.md         ← Monitoring, alertes, Log Analytics
+    ├── phase5/README.md         ← Bicep IaC, Update Manager, Cost Management
+    ├── phase6/README.md         ← Backup, Recovery Vault, test de restauration
+    └── phase7/README.md         ← Administration quotidienne, incidents, RBAC
+```
+
+---
+
+## Contact
+
+**Sam DOSSOU** — En recherche d'alternance 
+ [dossam2006@gmail.com]  
+🔗 [Votre LinkedIn]
