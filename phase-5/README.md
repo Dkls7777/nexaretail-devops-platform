@@ -2,12 +2,12 @@
 
 > **Projet :** NexaRetail DevOps Platform  
 > **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris  
-> **Date :** 26 mai 2026  
-> **Statut :** ✅ Terminé  
+>  
+> **Statut :**  Terminé  
 
 ---
 
-## 📋 Contenu de ce dossier
+##  Contenu de ce dossier
 
 | Fichier | Description |
 |---------|-------------|
@@ -16,7 +16,7 @@
 
 ---
 
-## 🎯 Objectif de la Phase 5
+##  Objectif de la Phase 5
 
 Après avoir conteneurisé l'application (M4), l'image Docker était construite
 et publiée **à la main** depuis le poste local. Cette approche ne tient pas
@@ -36,9 +36,9 @@ Cette phase met en place un **pipeline CI automatisé** qui s'exécute à chaque
 
 ---
 
-## 📦 Ce qui a été réalisé
+##  Ce qui a été réalisé
 
-### 🔐 Service Principal Azure
+###  Service Principal Azure
 
 Création d'un compte robot Azure (`nexaretail-github-actions`) avec le rôle
 `AcrPush` limité au seul registre `nexaretailprodacr`. GitHub Actions utilise
@@ -47,7 +47,7 @@ ce compte pour se connecter à Azure sans exposer des credentials humains.
 - `clientId`, `clientSecret`, `tenantId` stockés dans les secrets GitHub
 - Périmètre d'accès minimal : uniquement l'ACR, rien d'autre (principe du moindre privilège)
 
-### 🔒 Secrets GitHub Actions
+###  Secrets GitHub Actions
 
 Deux secrets configurés dans le repo GitHub (Settings → Secrets → Actions) :
 
@@ -58,7 +58,7 @@ Deux secrets configurés dans le repo GitHub (Settings → Secrets → Actions) 
 
 Ces secrets sont injectés dans le pipeline sans jamais apparaître dans les logs.
 
-### ⚙️ Pipeline CI — `.github/workflows/ci.yml`
+###  Pipeline CI — `.github/workflows/ci.yml`
 
 Le workflow se déclenche automatiquement sur chaque push vers `main`
 (uniquement si les dossiers `app/`, `helm/` ou le fichier `ci.yml` ont changé).
@@ -80,7 +80,7 @@ Il comprend **2 jobs exécutés en séquence** :
 - Génération d'un rapport SARIF uploadé comme artifact GitHub
 - `docker push` vers `nexaretailprodacr.azurecr.io` (uniquement sur `main`)
 
-### ✅ Résultat du scan Trivy
+###  Résultat du scan Trivy
 
 ```
 nexaretail-api:latest (alpine 3.23.4)    → 0 vulnérabilités ✅
@@ -95,7 +95,7 @@ app/node_modules/* (dépendances Express) → 0 vulnérabilités ✅
 
 ---
 
-## 🏗️ Architecture du pipeline CI
+##  Architecture du pipeline CI
 
 ```
 Développeur
@@ -112,25 +112,25 @@ Job 1 : Code Quality                Job 2 : Build → Scan → Push
 (needs: rien)                       (needs: code-quality)
     │                                        │
     ├── npm install                          ├── az login (Service Principal)
-    └── npm audit ──→ ✅ 0 HIGH             ├── az acr login
+    └── npm audit ──→  0 HIGH             ├── az acr login
                                             ├── docker build
                                             │     nexaretailprodacr.azurecr.io/
                                             │     nexaretail-api:1.0.3
                                             │     nexaretail-api:latest
-                                            ├── trivy scan ──→ ✅ 0 CRITICAL/HIGH
+                                            ├── trivy scan ──→  0 CRITICAL/HIGH
                                             ├── upload rapport SARIF
-                                            └── docker push → ACR Azure ✅
+                                            └── docker push → ACR Azure 
 
               │
               ▼
     nexaretailprodacr.azurecr.io
-    └── nexaretail-api:latest        ✅ prête pour M6 (CD GitOps)
-    └── nexaretail-api:1.0.3         ✅ versionnée + traçable
+    └── nexaretail-api:latest         prête pour M6 (CD GitOps)
+    └── nexaretail-api:1.0.3          versionnée + traçable
 ```
 
 ---
 
-## 📁 Structure des fichiers créés
+##  Structure des fichiers créés
 
 ```
 .github/
@@ -140,7 +140,7 @@ Job 1 : Code Quality                Job 2 : Build → Scan → Push
 
 ---
 
-## ✅ Validation Phase 5
+##  Validation Phase 5
 
 ```
 Run #1 → Failure  (Trivy bloque sur npm système Node.js)      → Corrigé
@@ -155,7 +155,7 @@ Image pushée sur ACR Azure          →  ✅  nexaretailprodacr.azurecr.io/nexa
 
 ---
 
-## 🐛 Problèmes rencontrés et solutions
+##  Problèmes rencontrés et solutions
 
 | Problème | Cause | Solution |
 |----------|-------|----------|
@@ -178,7 +178,7 @@ Image pushée sur ACR Azure          →  ✅  nexaretailprodacr.azurecr.io/nexa
 | Images pushées sur ACR | 2 tags (`latest` + `1.0.3`) |
 | Secrets GitHub configurés | 2 |
 | Runs avant succès | 3 (2 corrections) |
-| Ticket Jira fermé | SCRUM-10 ✅ |
+| Ticket Jira fermé | SCRUM-10  |
 
 ---
 
@@ -188,3 +188,13 @@ Image pushée sur ACR Azure          →  ✅  nexaretailprodacr.azurecr.io/nexa
 - **ACR Azure :** portal.azure.com → nexaretailprodacr
 - **Jira :** samdossou26.atlassian.net (SCRUM-10)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+- ---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`.github/workflows/ci.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/.github/workflows/ci.yml) | Pipeline CI — Job 1 (npm audit) + Job 2 (build, Trivy, push ACR) |
+
+> Dossier complet : [`.github/workflows/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/.github/workflows)
