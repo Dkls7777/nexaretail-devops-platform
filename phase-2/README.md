@@ -189,3 +189,16 @@ falcosecurity         https://falcosecurity.github.io/charts              ✅
 - **GitHub :** github.com/Dkls7777/nexaretail-devops-platform
 - **Jira :** samdossou26.atlassian.net (SCRUM-7)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`ansible/site.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/ansible/site.yml) | Playbook principal |
+| [`ansible/group_vars/all.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/ansible/group_vars/all.yml) | Variables globales |
+| [`ansible/roles/namespaces/tasks/main.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/ansible/roles/namespaces/tasks/main.yml) | Création des namespaces |
+| [`ansible/roles/rbac/tasks/main.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/ansible/roles/rbac/tasks/main.yml) | Configuration RBAC |
+
+> Dossier complet : [`ansible/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/ansible)
