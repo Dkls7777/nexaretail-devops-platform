@@ -2,7 +2,6 @@
 
 > **Projet :** NexaRetail DevOps Platform
 > **Auteur :** Sam DOSSOU — Etudiant L3 Cybersecurite EFREI Paris
-> **Date :** 28 mai 2026
 > **Statut :** Termine
 
 ---
@@ -242,3 +241,15 @@ git push origin main
 - **Guide reproduction :** voir `guide-reproduction.md`
 - **Documentation Kubescape :** kubescape.io/docs
 - **NSA K8s Hardening Guide :** media.defense.gov/2022/Aug/29/2003066362
+
+- ---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`kubescape/default-deny-all.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/kubescape/default-deny-all.yaml) | NetworkPolicy Zero Trust — bloque tout le trafic par défaut |
+| [`kubescape/allow-nexaretail-api.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/kubescape/allow-nexaretail-api.yaml) | Autorise le trafic entrant vers l'API (port 3000) |
+| [`kubescape/allow-monitoring.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/kubescape/allow-monitoring.yaml) | Autorise le scraping Prometheus |
+
+> Dossier complet : [`kubescape/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/kubescape)
