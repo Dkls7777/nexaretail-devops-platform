@@ -2,7 +2,6 @@
 
 > **Projet :** NexaRetail DevOps Platform
 > **Auteur :** Sam DOSSOU — Etudiant L3 Cybersecurite EFREI Paris
-> **Date :** 28 mai 2026
 > **Statut :** Termine
 
 ---
@@ -115,3 +114,13 @@ Duree du rolling update : < 2 secondes.
 - **GitHub :** github.com/Dkls7777/nexaretail-devops-platform
 - **Jira :** samdossou26.atlassian.net
 - **Rapport final :** docs/rapport-final-nexaretail.md
+
+- ---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`docs/rapport-final-nexaretail.md`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/docs/rapport-final-nexaretail.md) | Rapport final — bilan avant/après, stack, chiffres clés |
+
+> Tous les dossiers : [`infrastructure/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/infrastructure) · [`ansible/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/ansible) · [`app/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/app) · [`helm/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/helm) · [`monitoring/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/monitoring) · [`vault/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/vault) · [`falco/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/falco) · [`kubescape/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/kubescape)
