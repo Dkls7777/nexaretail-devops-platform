@@ -54,11 +54,11 @@ Migrer vers une infrastructure cloud-native Azure en 8 semaines.
 Concevoir et déployer de A à Z une plateforme DevSecOps complète avec
 pour objectifs :
 
-- **Zéro downtime** — rolling updates Kubernetes, plus jamais de coupure
-- **Déploiements quotidiens** — pipeline automatisée en 1m 46s
-- **Détection d'incident** — alerte en moins de 2 minutes via Falco + AlertManager
-- **Sécurité intégrée** — scan à chaque commit, secrets chiffrés AES-256, conformité NSA/CISA
-- **Réduction des coûts** — -18% sur le coût mensuel d'infrastructure
+- **Zéro downtime** - rolling updates Kubernetes, plus jamais de coupure
+- **Déploiements quotidiens** - pipeline automatisée en 1m 46s
+- **Détection d'incident** - alerte en moins de 2 minutes via Falco + AlertManager
+- **Sécurité intégrée** - scan à chaque commit, secrets chiffrés AES-256, conformité NSA/CISA
+- **Réduction des coûts** - -18% sur le coût mensuel d'infrastructure
 
 ---
 
