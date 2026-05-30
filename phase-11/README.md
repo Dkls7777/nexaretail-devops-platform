@@ -2,7 +2,6 @@
 
 > **Projet :** NexaRetail DevOps Platform
 > **Auteur :** Sam DOSSOU — Etudiant L3 Cybersecurite EFREI Paris
-> **Date :** 28 mai 2026
 > **Statut :** Termine
 
 ---
@@ -219,3 +218,15 @@ Ticket Jira SCRUM-22                        Termine
 - **Rapport validation :** docs/rapport-module11-demo.md
 - **Jira :** samdossou26.atlassian.net (SCRUM-22)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+- ---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`app/src/index.js`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/app/src/index.js) | Champ `demo` ajouté dans /version |
+| [`.github/workflows/ci.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/.github/workflows/ci.yml) | Pipeline validée — Run #6 en 1m 46s |
+| [`docs/rapport-module11-demo.md`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/docs/rapport-module11-demo.md) | Rapport de validation complet |
+
+> Dossier complet : [`docs/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/docs)
