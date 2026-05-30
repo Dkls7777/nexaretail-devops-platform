@@ -2,7 +2,7 @@
 
 > **Projet :** NexaRetail DevOps Platform
 > **Auteur :** Sam DOSSOU — Etudiant L3 Cybersecurite EFREI Paris
-> **Date :** 28 mai 2026
+> 
 > **Statut :** Termine
 
 ---
@@ -183,3 +183,13 @@ git push origin main
 - **GitHub :** github.com/Dkls7777/nexaretail-devops-platform
 - **Jira :** samdossou26.atlassian.net (SCRUM-20)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`falco/nexaretail-rules.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/falco/nexaretail-rules.yaml) | 3 règles custom MITRE ATT&CK (accès /etc/passwd, shell, connexion sortante) |
+
+> Dossier complet : [`falco/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/falco)
