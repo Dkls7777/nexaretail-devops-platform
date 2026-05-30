@@ -124,3 +124,19 @@ terraform apply  → 5/7 ressources créées sur Azure
 - **Jira :** samdossou26.atlassian.net
 - **Azure Portal :** portal.azure.com → nexaretail-prod-rg
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+- ---
+
+##  Code source de cette phase
+
+Les fichiers de configuration deployés lors de cette phase :
+
+| Fichier | Description |
+|---------|-------------|
+| [`infrastructure/terraform/environments/prod/main.tf`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/infrastructure/terraform/environments/prod/main.tf) | Ressources Azure principales (AKS, ACR, VNet) |
+| [`infrastructure/terraform/environments/prod/variables.tf`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/infrastructure/terraform/environments/prod/variables.tf) | Déclaration des variables |
+| [`infrastructure/terraform/environments/prod/terraform.tfvars`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/infrastructure/terraform/environments/prod/terraform.tfvars) | Valeurs des variables (région, noms) |
+| [`infrastructure/terraform/modules/aks/main.tf`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/infrastructure/terraform/modules/aks/main.tf) | Module AKS réutilisable |
+| [`infrastructure/terraform/modules/aks/variables.tf`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/infrastructure/terraform/modules/aks/variables.tf) | Variables du module AKS |
+
+> Le dossier complet : [`infrastructure/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/infrastructure)
