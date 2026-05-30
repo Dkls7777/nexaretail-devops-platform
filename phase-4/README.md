@@ -2,12 +2,12 @@
 
 > **Projet :** NexaRetail DevOps Platform  
 > **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris  
-> **Date :** 26 mai 2026  
-> **Statut :** ✅ Terminé  
+>  
+> **Statut :**  Terminé  
 
 ---
 
-## 📋 Contenu de ce dossier
+##  Contenu de ce dossier
 
 | Fichier | Description |
 |---------|-------------|
@@ -16,7 +16,7 @@
 
 ---
 
-## 🎯 Objectif de la Phase 4
+##  Objectif de la Phase 4
 
 Après avoir mis en place le moteur de déploiement GitOps (M3), les pods
 `nexaretail-api` étaient en `ImagePullBackOff` — ArgoCD déployait correctement
@@ -32,9 +32,9 @@ le cluster kind pour que les pods passent enfin en `Running`.
 
 ---
 
-## 📦 Ce qui a été réalisé
+##  Ce qui a été réalisé
 
-### 🟢 Application Node.js — API de commandes B2B
+###  Application Node.js — API de commandes B2B
 
 Création d'une API Express.js simulant le système de commandes de NexaRetail :
 
@@ -51,7 +51,7 @@ Création d'une API Express.js simulant le système de commandes de NexaRetail :
 > pour mesurer les performances. En l'intégrant dès M4, le monitoring sera
 > opérationnel sans modifier l'application plus tard.
 
-### 🐳 Dockerfile multi-stage
+###  Dockerfile multi-stage
 
 Le Dockerfile utilise une stratégie **multi-stage** en deux étapes :
 
@@ -64,22 +64,22 @@ Optimisations de sécurité appliquées :
 - `HEALTHCHECK` Docker intégré (30s interval, 3s timeout)
 - `.dockerignore` pour exclure `node_modules`, `.env`, `.git`
 
-### ✅ Validation complète de la chaîne GitOps
+###  Validation complète de la chaîne GitOps
 
 Après `kind load docker-image` et `git push`, ArgoCD a automatiquement
 redéployé les pods avec la nouvelle image. Les 2 pods sont passés de
 `ImagePullBackOff` à **`Running`** sans aucune intervention manuelle.
 
 ```
-ArgoCD : Synced + Healthy   ✅
-2 pods Running              ✅
-/health depuis le cluster   ✅  (hostname = nom du pod K8s)
-/api/orders/stats/summary   ✅  (CA : 8 201,25€ — 4 marchands)
+ArgoCD : Synced + Healthy   
+2 pods Running              
+/health depuis le cluster     (hostname = nom du pod K8s)
+/api/orders/stats/summary     (CA : 8 201,25€ — 4 marchands)
 ```
 
 ---
 
-## 🏗️ Architecture de l'application
+##  Architecture de l'application
 
 ```
 app/
@@ -98,15 +98,15 @@ app/
 Cluster Kubernetes (kind-nexaretail-aks)
 │
 └── namespace: nexaretail-prod
-    ├── nexaretail-api-xxx-pod1    Running ✅  (image nexaretail-api:1.0.0)
-    └── nexaretail-api-xxx-pod2    Running ✅  (image nexaretail-api:1.0.0)
+    ├── nexaretail-api-xxx-pod1    Running  (image nexaretail-api:1.0.0)
+    └── nexaretail-api-xxx-pod2    Running   (image nexaretail-api:1.0.0)
 
          ↑ déployé automatiquement par ArgoCD (Git → Cluster)
 ```
 
 ---
 
-## 📁 Structure des fichiers créés
+##  Structure des fichiers créés
 
 ```
 app/
@@ -126,7 +126,7 @@ helm/nexaretail-api/
 
 ---
 
-## ✅ Validation Phase 4
+##  Validation Phase 4
 
 ```
 docker build -t nexaretail-api:1.0.0 .
@@ -151,7 +151,7 @@ curl /health depuis le cluster (port-forward)
 
 ---
 
-## 🐛 Problèmes rencontrés et solutions
+##  Problèmes rencontrés et solutions
 
 | Problème | Cause | Solution |
 |----------|-------|----------|
@@ -160,7 +160,7 @@ curl /health depuis le cluster (port-forward)
 
 ---
 
-## 📊 Chiffres clés
+##  Chiffres clés
 
 | Indicateur | Valeur |
 |------------|--------|
@@ -182,3 +182,15 @@ curl /health depuis le cluster (port-forward)
 - **Tester l'API :** `kubectl port-forward -n nexaretail-prod deployment/nexaretail-api 3000:3000`
   puis `curl http://localhost:3000/health`
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`app/src/index.js`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/app/src/index.js) | API Express — /health, /version, /metrics, /api/orders |
+| [`app/Dockerfile`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/app/Dockerfile) | Dockerfile multi-stage (node:20-alpine, non-root) |
+| [`app/package.json`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/app/package.json) | Dépendances Node.js |
+
+> Dossier complet : [`app/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/app)
