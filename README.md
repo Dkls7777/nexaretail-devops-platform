@@ -12,20 +12,53 @@
 
 ---
 
-## Contexte & Probleme resolu
+#### Contexte & Problème résolu
 
-**L'entreprise :** NexaRetail SAS — scale-up française e-commerce B2B, 180 collaborateurs,
-4 millions de commandes/mois pour 2 300 marchands clients.
+### L'entreprise
 
-**Le probleme :** Infrastructure sur serveurs dedies OVH, deploiements 100% manuels
-chaque jeudi soir via des shell scripts. Le serveur de secours n'avait pas ete teste depuis 14 mois.
+NexaRetail SAS est une scale-up française spécialisée dans le e-commerce B2B.
+180 collaborateurs, 2 300 marchands clients, 4 millions de commandes traitées
+chaque mois. Une croissance de 35% par an qui place la plateforme technique
+au cœur de l'activité.
 
-**L'incident declencheur :** En janvier 2026, une mise en production a mis le site hors ligne
-pendant **3h47** — le CTO a recu un appel de son plus gros client a 23h.
-Detection de l'incident : quand le client appelle.
+---
 
-**La mission :** Migrer vers une infrastructure cloud-native Azure en 8 semaines.
-Concevoir et deployer de A a Z une plateforme DevSecOps complete.
+### Le problème principal
+
+L'infrastructure reposait sur des serveurs dédiés OVH avec des déploiements
+100% manuels chaque jeudi soir via des shell scripts. Le serveur de secours
+n'avait pas été testé depuis 14 mois.
+
+En janvier 2026, une mise en production ratée a mis le site hors ligne pendant
+**3h47**. Le CTO a reçu un appel de son plus gros client à 23h.
+C'est lui qui a signalé la panne  pas un système de monitoring.
+
+---
+
+### Les problèmes sous-jacents
+
+| Problème | Impact |
+|----------|--------|
+| Aucun monitoring | Incident détecté quand le client appelle |
+| Déploiements manuels | Risque d'erreur humaine à chaque mise en prod |
+| Aucun rollback automatique | Retour arrière à la main, sous pression, en urgence |
+| Secrets en clair dans le code | Risque de fuite de données critique |
+| Aucun scan de sécurité | Vulnérabilités non détectées avant production |
+| Aucune détection d'intrusion | Comportements anormaux invisibles en runtime |
+
+---
+
+### La mission
+
+Migrer vers une infrastructure cloud-native Azure en 8 semaines.
+Concevoir et déployer de A à Z une plateforme DevSecOps complète avec
+pour objectifs :
+
+- **Zéro downtime** — rolling updates Kubernetes, plus jamais de coupure
+- **Déploiements quotidiens** — pipeline automatisée en 1m 46s
+- **Détection d'incident** — alerte en moins de 2 minutes via Falco + AlertManager
+- **Sécurité intégrée** — scan à chaque commit, secrets chiffrés AES-256, conformité NSA/CISA
+- **Réduction des coûts** — -18% sur le coût mensuel d'infrastructure
 
 ---
 
