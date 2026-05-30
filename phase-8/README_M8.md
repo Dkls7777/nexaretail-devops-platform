@@ -2,7 +2,7 @@
 
 > **Projet :** NexaRetail DevOps Platform
 > **Auteur :** Sam DOSSOU — Etudiant L3 Cybersecurite EFREI Paris
-> **Date :** 28 mai 2026
+> 
 > **Statut :** Termine
 
 ---
@@ -206,3 +206,14 @@ git push origin main
 - **GitHub :** github.com/Dkls7777/nexaretail-devops-platform
 - **Jira :** samdossou26.atlassian.net (SCRUM-17)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`vault/policy-nexaretail-api.hcl`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/vault/policy-nexaretail-api.hcl) | Policy Vault — droits lecture secrets |
+| [`vault/auth-kubernetes.sh`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/vault/auth-kubernetes.sh) | Script auth Kubernetes dans Vault |
+
+> Dossier complet : [`vault/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/vault)
