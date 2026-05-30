@@ -1,8 +1,7 @@
 # Phase 1 — Infrastructure as Code (Terraform / Azure AKS)
 
 > **Projet :** NexaRetail DevOps Platform  
-> **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris  
-> **Date :** 25 mai 2026  
+> **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris    
 > **Statut :**  Terminé  
 
 ---
