@@ -168,3 +168,14 @@ git push origin main
 - **Grafana :** `kubectl port-forward -n monitoring svc/kube-prometheus-stack-grafana 3000:80`
   puis ouvrir http://localhost:3000 (admin / NexaRetail2026!)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`monitoring/prometheus-rules.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/monitoring/prometheus-rules.yaml) | PrometheusRule SLO — alertes taux d'erreur, latence, pod down |
+| [`monitoring/servicemonitor.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/monitoring/servicemonitor.yaml) | ServiceMonitor — scraping /metrics toutes les 30s |
+
+> Dossier complet : [`monitoring/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/monitoring)
