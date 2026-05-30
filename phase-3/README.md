@@ -2,12 +2,12 @@
 
 > **Projet :** NexaRetail DevOps Platform  
 > **Auteur :** Sam DOSSOU — Étudiant L3 Cybersécurité EFREI Paris  
-> **Date :** 26 mai 2026  
-> **Statut :** ✅ Terminé  
+
+> **Statut :**  Terminé  
 
 ---
 
-## 📋 Contenu de ce dossier
+##  Contenu de ce dossier
 
 | Fichier | Description |
 |---------|-------------|
@@ -16,7 +16,7 @@
 
 ---
 
-## 🎯 Objectif de la Phase 3
+##  Objectif de la Phase 3
 
 Après avoir provisionné l'infrastructure (M1) et configuré le cluster (M2),
 il faut maintenant mettre en place le **moteur de déploiement automatique**.
@@ -31,9 +31,9 @@ Plus de `kubectl apply` à la main — **Git devient la seule source de vérité
 
 ---
 
-## 📦 Ce qui a été réalisé
+##  Ce qui a été réalisé
 
-### ☸️ Installation d'ArgoCD
+###  Installation d'ArgoCD
 
 ArgoCD a été installé via Helm dans le namespace `argocd` du cluster kind local.
 7 pods déployés et Running en moins de 3 minutes.
@@ -41,7 +41,7 @@ ArgoCD a été installé via Helm dans le namespace `argocd` du cluster kind loc
 > **Correction rencontrée :** le nom du chart Helm est `argo/argo-cd`
 > et non `argo/argocd`. Erreur classique documentée dans le guide.
 
-### 📁 Helm Chart nexaretail-api
+###  Helm Chart nexaretail-api
 
 Création d'un chart Helm complet simulant l'API de commandes NexaRetail :
 
@@ -52,7 +52,7 @@ Création d'un chart Helm complet simulant l'API de commandes NexaRetail :
 | `templates/deployment.yaml` | Déploiement Kubernetes avec variables Helm |
 | `templates/service.yaml` | Service ClusterIP exposant le port 3000 |
 
-### 🔄 Application ArgoCD (GitOps)
+###  Application ArgoCD (GitOps)
 
 Création du manifest `gitops/applications/nexaretail-api.yaml` — la pièce centrale :
 
@@ -62,7 +62,7 @@ Création du manifest `gitops/applications/nexaretail-api.yaml` — la pièce ce
 - `automated.prune: true` : supprime les ressources retirées de Git
 - `targetRevision: main` : suit la branche principale
 
-### ✅ Synchronisation Git → Cluster validée
+###  Synchronisation Git → Cluster validée
 
 Après le `git push`, ArgoCD a automatiquement détecté les nouveaux fichiers
 et déployé les manifests dans `nexaretail-prod` sans aucune intervention manuelle.
@@ -75,7 +75,7 @@ Les 2 pods `nexaretail-api` ont bien été créés par ArgoCD.
 
 ---
 
-## 🏗️ Architecture GitOps déployée
+##  Architecture GitOps déployée
 
 ```
 GitHub (source de vérité)
@@ -110,7 +110,7 @@ Cluster Kubernetes (kind-nexaretail-aks)
 
 ---
 
-## 📁 Structure des fichiers créés
+##  Structure des fichiers créés
 
 ```
 helm/
@@ -131,7 +131,7 @@ docs/
 
 ---
 
-## ✅ Validation ArgoCD
+##  Validation ArgoCD
 
 ```
 kubectl get pods -n argocd
@@ -146,7 +146,7 @@ kubectl get pods -n nexaretail-prod
 
 ---
 
-## 🐛 Problèmes rencontrés et solutions
+##  Problèmes rencontrés et solutions
 
 | Problème | Cause | Solution |
 |----------|-------|----------|
@@ -156,7 +156,7 @@ kubectl get pods -n nexaretail-prod
 
 ---
 
-## 📊 Chiffres clés
+##  Chiffres clés
 
 | Indicateur | Valeur |
 |------------|--------|
@@ -176,3 +176,16 @@ kubectl get pods -n nexaretail-prod
 - **ArgoCD UI :** `kubectl port-forward service/argocd-server -n argocd 8080:443`
   puis ouvrir https://localhost:8080 (admin / `Ir3XwzA-zS0zS98l`)
 - **Guide reproduction :** voir `guide-reproduction.md`
+
+- ---
+
+## Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`helm/nexaretail-api/Chart.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/helm/nexaretail-api/Chart.yaml) | Métadonnées du chart Helm |
+| [`helm/nexaretail-api/values.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/helm/nexaretail-api/values.yaml) | Paramètres de déploiement |
+| [`helm/nexaretail-api/templates/deployment.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/helm/nexaretail-api/templates/deployment.yaml) | Template Deployment |
+| [`gitops/applications/nexaretail-api.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/gitops/applications/nexaretail-api.yaml) | Manifest ArgoCD (auto-sync) |
+
+> Dossiers complets : [`helm/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/helm) · [`gitops/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/gitops)
