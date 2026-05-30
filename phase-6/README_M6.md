@@ -168,3 +168,13 @@ Commit github-actions[bot] visible sur Git   OK
 - **GitHub Actions :** github.com/Dkls7777/nexaretail-devops-platform/actions
 - **Jira :** samdossou26.atlassian.net (SCRUM-15)
 - **Guide reproduction :** voir `guide-reproduction.md`
+---
+
+##  Code source de cette phase
+
+| Fichier | Description |
+|---------|-------------|
+| [`.github/workflows/ci.yml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/.github/workflows/ci.yml) | Job 3 (update-helm) — met à jour values.yaml automatiquement |
+| [`helm/nexaretail-api/values.yaml`](https://github.com/Dkls7777/nexaretail-devops-platform/blob/main/helm/nexaretail-api/values.yaml) | Mis à jour par github-actions[bot] à chaque run |
+
+> Dossier complet : [`.github/workflows/`](https://github.com/Dkls7777/nexaretail-devops-platform/tree/main/.github/workflows)
